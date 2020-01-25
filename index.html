@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#009587" /> <!-- theme color for address bar -->
+  <meta name="Description" content="Practise Progressive Webb Application PWA To-Do">
+
+  <title>PWA TODO</title>
+  
+  <link rel="apple-touch-icon" href="launcher-icon-512.png">
+  
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/primitive-ui/dist/css/main.css" />
+  <link rel="manifest" href="./manifest.json">
+</head>
+
+<body>
+  <div class="small-container">
+    <h1>PWA To Do List with promt</h1>
+
+    <form>
+      <input id="item" type="text" placeholder="New" required />
+      <input id="add" type="submit" value="Add" />
+    </form>
+
+    <h2>Items</h2>
+    <ul></ul>
+
+    <button id="clear">Clear All</button>
+    <button id="install">Install</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
