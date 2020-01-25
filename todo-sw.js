@@ -11,6 +11,7 @@ cacheName = "todo2"
         '/',  // this is needed, else won't work! 
         'favicon.ico',
         'index.html',
+        'style.css',
         'main.js',
         'https://unpkg.com/primitive-ui/dist/css/main.css',
         'manifest.json'

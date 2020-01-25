@@ -79,8 +79,8 @@ install.addEventListener('click', e => {
   install.style.display = 'none'
   deferredPromptEvent.prompt()
   deferredPromptEvent.userChoice
-    .then(result => {
+    /* .then(result => {
       if (result.outcome === 'accepted') alert('well done')
       else alert('maybe next time')
-    })
+    }) */
 })
