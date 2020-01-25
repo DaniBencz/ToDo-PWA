@@ -1,9 +1,10 @@
 'use strict'
 
-const form = document.querySelector('form')
-const ul = document.querySelector('ul')
-const button = document.querySelector('button')
-const input = document.getElementById('item')
+const form = document.querySelector('form'),
+      ul = document.querySelector('ul'),
+      button = document.querySelector('button'),
+      input = document.getElementById('item'),
+      container = document.getElementsByClassName('small-container')[0]
 let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
 
 //local storage values are always string type!
@@ -68,19 +69,25 @@ if (navigator.serviceWorker) {
   })
 }
 
+const installHandler = () => {
+  let install = document.getElementById('install')
+  install.addEventListener('click', e => {
+    install.style.display = 'none'
+    deferredPromptEvent.prompt()
+    deferredPromptEvent.userChoice
+  })
+}
+
 // install promt
 let deferredPromptEvent
 window.addEventListener('beforeinstallprompt', (e) => {
   deferredPromptEvent = e // stash event to trigger later
-})
 
-let install = document.getElementById('install')
-install.addEventListener('click', e => {
-  install.style.display = 'none'
-  deferredPromptEvent.prompt()
-  deferredPromptEvent.userChoice
-    /* .then(result => {
-      if (result.outcome === 'accepted') alert('well done')
-      else alert('maybe next time')
-    }) */
+  let install = document.createElement("button")
+  install.innerHTML = "Install"
+  install.setAttribute("id", "install")
+  container.appendChild(install)
+  //title.parentNode.insertBefore(install, title.nextSibling)
+
+  installHandler()
 })
