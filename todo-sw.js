@@ -1,5 +1,7 @@
+'use strict'
+
 console.log("in todo-sw.js")
-cacheName = "todo2"
+const cacheName = "todo2"
 
 /* window. */self.addEventListener('install', function (e) {
   console.log('worker installed')

@@ -5,3 +5,12 @@
 #install{
   float: right;
 }
+
+.del{
+  margin-bottom: -6px;
+  margin-left: 10px;
+}
+
+.del:hover{
+  cursor: pointer;
+}

@@ -3,10 +3,10 @@
 // window.resizeTo(500, 500) disabled in Chrome
 
 const form = document.querySelector('form'),
-      ul = document.querySelector('ul'),
-      button = document.querySelector('button'),
-      input = document.getElementById('item'),
-      container = document.getElementsByClassName('small-container')[0]
+  ul = document.querySelector('ul'),
+  clear = document.querySelector('button'),
+  input = document.getElementById('item'),
+  container = document.getElementsByClassName('small-container')[0]
 let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
 
 //local storage values are always string type!
@@ -15,13 +15,17 @@ const data = JSON.parse(localStorage.getItem('items'))
 
 const liMaker = text => {
   const li = document.createElement('li')
-  const del = document.createElement('button')
-  del.innerHTML = 'Delete'
-  del.setAttribute('style', 'margin:10px;')
+  // const del = document.createElement('button')
+  const del = document.createElement('img')
+  // del.innerHTML = 'Delete'
+  del.setAttribute('src', 'delete.png')
+  del.setAttribute('class', 'del')
+  del.setAttribute('height', '25')
+  del.setAttribute('width', '25')
 
-  del.addEventListener('click', function (e) {
-    e.preventDefault()
-    document.querySelectorAll('li').forEach(function (el) {
+  del.addEventListener('click', e => {
+    // e.preventDefault()
+    document.querySelectorAll('li').forEach(el => {
       //delete element
       if (el.getAttribute('key') === text) {
         el.parentNode.removeChild(el)
@@ -53,7 +57,7 @@ data.forEach(item => {
   liMaker(item)
 })
 
-button.addEventListener('click', function () {
+clear.addEventListener('click', function () {
   localStorage.clear()
   while (ul.firstChild) {
     ul.removeChild(ul.firstChild)
