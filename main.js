@@ -1,5 +1,7 @@
 'use strict'
 
+// window.resizeTo(500, 500) disabled in Chrome
+
 const form = document.querySelector('form'),
       ul = document.querySelector('ul'),
       button = document.querySelector('button'),
