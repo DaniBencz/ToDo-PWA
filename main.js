@@ -9,33 +9,25 @@ const form = document.querySelector('form'),
   container = document.getElementsByClassName('small-container')[0]
 let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
 
-//local storage values are always string type!
-localStorage.setItem('items', JSON.stringify(itemsArray))
+localStorage.setItem('items', JSON.stringify(itemsArray)) //local storage values are always string type!
 const data = JSON.parse(localStorage.getItem('items'))
 
 const liMaker = text => {
   const li = document.createElement('li')
   const del = document.createElement('button')
-  del.innerHTML = '—'
+  del.innerHTML = '<b>—</b>'
   del.setAttribute('class', 'del')
-
-  // const del = document.createElement('img')
-  // del.setAttribute('src', 'delete.png')
-  /*  del.setAttribute('height', '25')
-   del.setAttribute('width', '25') */
 
   del.addEventListener('click', e => {
     e.preventDefault()
     document.querySelectorAll('li').forEach(el => {
-      //delete element
       if (el.getAttribute('key') === text) {
-        el.parentNode.removeChild(el)
+        el.parentNode.removeChild(el) //delete element from DOM
       }
     })
 
-    //remove from localSt
     let temp = JSON.parse(localStorage.getItem('items'))
-    temp.splice(temp.indexOf(text), 1)
+    temp.splice(temp.indexOf(text), 1) //remove from local storage
     localStorage.setItem('items', JSON.stringify(temp))
   })
 
@@ -44,7 +36,7 @@ const liMaker = text => {
 
   const t = document.createTextNode(text)
   li.appendChild(t)
-  // li.textContent = text
+  // li.textContent = text // won't work with button
   ul.appendChild(li)
 }
 
@@ -68,8 +60,7 @@ clear.addEventListener('click', function () {
   }
 })
 
-// Service Worker and Caching
-if (navigator.serviceWorker) {
+if (navigator.serviceWorker) {  // Service Worker and Caching
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('todo-sw.js', {
       scope: '/'  // optional
@@ -88,8 +79,7 @@ const installHandler = () => {
   })
 }
 
-// install promt
-let deferredPromptEvent
+let deferredPromptEvent // install promt
 window.addEventListener('beforeinstallprompt', (e) => {
   deferredPromptEvent = e // stash event to trigger later
 
