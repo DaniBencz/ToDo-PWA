@@ -16,7 +16,8 @@ const cacheName = "todo2"
         'style.css',
         'main.js',
         'https://unpkg.com/primitive-ui/dist/css/main.css',
-        'manifest.json'
+        'manifest.json',
+        /* 'launcher-icon-144.png' */
       ])
     }).then(() => self.skipWaiting())
   )
@@ -34,14 +35,19 @@ self.addEventListener('activate', function (e) {
 
 // add home screen: https://developers.google.com/web/fundamentals/app-install-banners
 
-self.addEventListener('fetch', function (e) {
+self.addEventListener('fetch', e => {
+  
   e.respondWith(
 
-    fetch(e.request) // do a regular fetch, no action
+    /* fetch(e.request) // do a regular fetch, no action
       //.then(() => console.log('fetching: ', e.request.url))
       .catch(() => { // there was network error, we use cache instead
         console.log('loading from cache')
         return caches.match(e.request)
-      })
+      }) */
+
+    caches.match(e.request).catch(() => {
+      fetch(e.request)
+    })
   )
 })

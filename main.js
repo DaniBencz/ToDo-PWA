@@ -15,16 +15,17 @@ const data = JSON.parse(localStorage.getItem('items'))
 
 const liMaker = text => {
   const li = document.createElement('li')
-  // const del = document.createElement('button')
-  const del = document.createElement('img')
-  // del.innerHTML = 'Delete'
-  del.setAttribute('src', 'delete.png')
+  const del = document.createElement('button')
+  del.innerHTML = '—'
   del.setAttribute('class', 'del')
-  del.setAttribute('height', '25')
-  del.setAttribute('width', '25')
+
+  // const del = document.createElement('img')
+  // del.setAttribute('src', 'delete.png')
+  /*  del.setAttribute('height', '25')
+   del.setAttribute('width', '25') */
 
   del.addEventListener('click', e => {
-    // e.preventDefault()
+    e.preventDefault()
     document.querySelectorAll('li').forEach(el => {
       //delete element
       if (el.getAttribute('key') === text) {
@@ -38,9 +39,12 @@ const liMaker = text => {
     localStorage.setItem('items', JSON.stringify(temp))
   })
 
-  li.textContent = text
   li.setAttribute('key', text)
   li.appendChild(del)
+
+  const t = document.createTextNode(text)
+  li.appendChild(t)
+  // li.textContent = text
   ul.appendChild(li)
 }
 
