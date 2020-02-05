@@ -1,12 +1,20 @@
-.small-container{
+body {
+  background: rgb(248, 248,248);
+}
+
+#item{
+  background-color: white;
+}
+
+.small-container {
   max-width: 600px;
 }
 
-#install{
+#install {
   float: right;
 }
 
-.del{
+.del {
   margin-right: 5px;
   border-radius: 50px;
   width: 30px;
@@ -14,7 +22,7 @@
   padding: 0;
 }
 
-ul{
+ul {
   list-style: none;
   padding-left: 10px;
 }
