@@ -1,7 +1,7 @@
 'use strict'
 
 console.log("in todo-sw.js")
-const cacheName = "todo1"
+const cacheName = "todo2"
 
 /* window. */self.addEventListener('install', function (e) {
   console.log('worker installed')
@@ -17,7 +17,7 @@ const cacheName = "todo1"
         'main.js',
         'https://unpkg.com/primitive-ui/dist/css/main.css',
         'manifest.json',
-        /* 'launcher-icon-144.png' */
+        // 'png/launcher-icon-144.png'
       ])
     }).then(() => self.skipWaiting())
   )
@@ -36,18 +36,32 @@ self.addEventListener('activate', function (e) {
 // add home screen: https://developers.google.com/web/fundamentals/app-install-banners
 
 self.addEventListener('fetch', e => {
-  
-  e.respondWith(
 
-    /* fetch(e.request) // do a regular fetch, no action
-      //.then(() => console.log('fetching: ', e.request.url))
-      .catch(() => { // there was network error, we use cache instead
-        console.log('loading from cache')
-        return caches.match(e.request)
-      }) */
+  if (e.request.url.includes('/launcher-icon')) {
+    console.log('.png!')
+    e.respondWith(
+      caches.match(e.request) // try cache first
+        .then((resp) => {
+          return resp || fetch(e.request) // cache won't yield first time around
+            // .then() // use this to add .png files to cache
+        })
+    )
+  }
+  else {
+    e.respondWith(
 
-    caches.match(e.request).catch(() => {
-      fetch(e.request)
-    })
-  )
+      // fetch(e.request) // do a regular fetch, no action
+      //   //.then(() => console.log('fetching: ', e.request.url))
+      //   .catch(() => { // there was network error, we use cache instead
+      //     console.log('loading from cache')
+      //     return caches.match(e.request)
+      //   })
+
+      caches.match(e.request)
+        .then((resp) => {
+          return resp || fetch(e.request)
+        })
+        .catch(() => { fetch(e.request) }) // caches.match always resolves, we never get here
+    )
+  }
 })
